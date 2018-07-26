@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.AdminMapper">
+	<resultMap type="Admin" id="adminResultMap">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+	</resultMap>
+	<select id="selectOne" parameterType="Integer" resultType="Admin">
+		select * from admin where id=#{0}
+	</select>
+	<select id="select" resultMap="adminResultMap">
+		select * from admin
+	</select>
+	<insert id="insert" parameterType="Admin">
+		insert into admin(username,password) values(#{username},#{password})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		delete from admin where id=#{0}
+	</delete>
+	<update id="update" parameterType="Admin">
+		update admin set username=#{username},password=#{password} where id=#{id}
+	</update>
+</mapper>

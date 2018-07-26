@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.HpriceMapper">
+	<resultMap type="Hprice" id="hpriceResultMap">
+		<id column="id" property="id"/>
+		<result column="kid" property="kid"/>
+		<result column="sdate" property="sdate"/>
+		<result column="edate" property="edate"/>
+		<result column="price" property="price"/>
+		<result column="dis" property="dis"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	<select id="selectOne" parameterType="Integer" resultType="Hprice">
+		select * from hprice where id=#{0}
+	</select>
+	<select id="select" resultMap="hpriceResultMap">
+		select * from hprice
+	</select>
+	<insert id="insert" parameterType="Hprice">
+		insert into hprice(kid,sdate,edate,price,dis,status) values(#{kid},#{sdate},#{edate},#{price},#{dis},#{status})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		delete from hprice where id=#{0}
+	</delete>
+	<update id="update" parameterType="Hprice">
+		update hprice set kid=#{kid},sdate=#{sdate},edate=#{edate},price=#{price},dis=#{dis},status=#{status} where id=#{id}
+	</update>
+</mapper>

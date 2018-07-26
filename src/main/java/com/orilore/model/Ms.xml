@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.MsMapper">
+	<resultMap type="Ms" id="msResultMap">
+		<id column="id" property="id"/>
+		<result column="total" property="total"/>
+		<result column="margin" property="margin"/>
+		<result column="tempid" property="tempid"/>
+		<result column="tempxid" property="tempxid"/>
+		<result column="tempsid" property="tempsid"/>
+		<result column="sign" property="sign"/>
+		<result column="appid" property="appid"/>
+		<result column="appkey" property="appkey"/>
+		<result column="phone" property="phone"/>
+	</resultMap>
+	<select id="selectOne" parameterType="int" resultType="Ms">
+		select * from ms where id=#{0}
+	</select>
+	<select id="select" resultMap="msResultMap">
+		select * from ms
+	</select>
+	<insert id="insert" parameterType="Ms">
+		insert into ms(total,margin,tempid,tempxid,tempsid,sign,appid,appkey,phone) values(#{total},#{margin},#{tempid},#{tempxid},#{tempsid},#{sign},#{appid},#{appkey},#{phone})
+	</insert>
+	<delete id="delete" parameterType="int">
+		delete from ms where id=#{0}
+	</delete>
+	<update id="update" parameterType="Ms">
+		update ms set total=#{total},margin=#{margin},tempid=#{tempid},tempxid=#{tempxid},tempsid=#{tempsid},sign=#{sign},appid=#{appid},appkey=#{appkey},phone=#{phone} where id=#{id}
+	</update>
+</mapper>

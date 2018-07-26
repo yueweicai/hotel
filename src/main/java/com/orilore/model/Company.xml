@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.CompanyMapper">
+	<resultMap type="Company" id="companyResultMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="addr" property="addr"/>
+		<result column="co" property="co"/>
+		<result column="phone" property="phone"/>
+		<result column="tel" property="tel"/>
+		<result column="money" property="money"/>
+		<result column="wifi" property="wifi"/>
+		<result column="hot" property="hot"/>
+		<result column="tv" property="tv"/>
+		<result column="fcar" property="fcar"/>
+		<result column="air" property="air"/>
+		<result column="pica" property="pica"/>
+		<result column="picb" property="picb"/>
+		<result column="picc" property="picc"/>
+		<result column="picd" property="picd"/>
+		<result column="pice" property="pice"/>
+		<result column="picf" property="picf"/>
+		<result column="info" property="info"/>
+	</resultMap>
+	<select id="selectOne" parameterType="Integer" resultType="Company">
+		select * from company where id=#{0}
+	</select>
+	<select id="select" resultMap="companyResultMap">
+		select * from company
+	</select>
+	<insert id="insert" parameterType="Company">
+		insert into company(name,addr,co,phone,tel,money,wifi,hot,tv,fcar,air,pica,picb,picc,picd,pice,picf,info) values(#{name},#{addr},#{co},#{phone},#{tel},#{money},#{wifi},#{hot},#{tv},#{fcar},#{air},#{pica},#{picb},#{picc},#{picd},#{pice},#{picf},#{info})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		delete from company where id=#{0}
+	</delete>
+	<update id="update" parameterType="Company">
+		update company set name=#{name},addr=#{addr},co=#{co},phone=#{phone},tel=#{tel},money=#{money},wifi=#{wifi},hot=#{hot},tv=#{tv},fcar=#{fcar},air=#{air},pica=#{pica},picb=#{picb},picc=#{picc},picd=#{picd},pice=#{pice},picf=#{picf},info=#{info} where id=#{id}
+	</update>
+</mapper>

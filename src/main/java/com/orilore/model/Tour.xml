@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.TourMapper">
+	<resultMap type="Tour" id="tourResultMap">
+		<id column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="pdate" property="pdate"/>
+		<result column="content" property="content"/>
+	</resultMap>
+	<select id="selectOne" parameterType="Integer" resultType="Tour">
+		select * from tour where id=#{0}
+	</select>
+	<select id="select" resultMap="tourResultMap">
+		select * from tour
+	</select>
+	<insert id="insert" parameterType="Tour">
+		insert into tour(title,pdate,content) values(#{title},#{pdate},#{content})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		delete from tour where id=#{0}
+	</delete>
+	<update id="update" parameterType="Tour">
+		update tour set title=#{title},pdate=#{pdate},content=#{content} where id=#{id}
+	</update>
+</mapper>

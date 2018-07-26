@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.UserMapper">
+	<resultMap type="User" id="userResultMap">
+		<id column="id" property="id"/>
+		<result column="phone" property="phone"/>
+		<result column="password" property="password"/>
+		<result column="nick" property="nick"/>
+		<result column="gender" property="gender"/>
+		<result column="province" property="province"/>
+		<result column="city" property="city"/>
+	</resultMap>
+	<select id="selectOne" parameterType="Integer" resultType="User">
+		select * from user where id=#{0}
+	</select>
+	<select id="select" resultMap="userResultMap">
+		select * from user
+	</select>
+	<insert id="insert" parameterType="User">
+		insert into user(phone,password,nick,gender,province,city) values(#{phone},#{password},#{nick},#{gender},#{province},#{city})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		delete from user where id=#{0}
+	</delete>
+	<update id="update" parameterType="User">
+		update user set phone=#{phone},password=#{password},nick=#{nick},gender=#{gender},province=#{province},city=#{city} where id=#{id}
+	</update>
+</mapper>

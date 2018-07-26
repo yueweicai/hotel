@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.ReserveMapper">
+	<resultMap type="Reserve" id="reserveResultMap">
+		<id column="id" property="id"/>
+		<result column="custom" property="custom"/>
+		<result column="wxnick" property="wxnick"/>
+		<result column="phone" property="phone"/>
+		<result column="persons" property="persons"/>
+		<result column="rtime" property="rtime"/>
+		<result column="rdate" property="rdate"/>
+		<result column="ldate" property="ldate"/>
+		<result column="hid" property="hid"/>
+		<result column="price" property="price"/>
+		<result column="total" property="total"/>
+		<result column="res" property="res"/>
+	</resultMap>
+	<select id="selectOne" parameterType="Integer" resultType="Reserve">
+		select * from reserve where id=#{0}
+	</select>
+	<select id="select" resultMap="reserveResultMap">
+		select * from reserve
+	</select>
+	<insert id="insert" parameterType="Reserve">
+		insert into reserve(custom,wxnick,phone,persons,rtime,rdate,ldate,hid,price,total,res) values(#{custom},#{wxnick},#{phone},#{persons},#{rtime},#{rdate},#{ldate},#{hid},#{price},#{total},#{res})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		delete from reserve where id=#{0}
+	</delete>
+	<update id="update" parameterType="Reserve">
+		update reserve set custom=#{custom},wxnick=#{wxnick},phone=#{phone},persons=#{persons},rtime=#{rtime},rdate=#{rdate},ldate=#{ldate},hid=#{hid},price=#{price},total=#{total},res=#{res} where id=#{id}
+	</update>
+</mapper>

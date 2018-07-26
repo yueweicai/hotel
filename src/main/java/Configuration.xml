@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Admin" type="com.orilore.model.Admin"/>
+		<typeAlias alias="Company" type="com.orilore.model.Company"/>
+		<typeAlias alias="House" type="com.orilore.model.House"/>
+		<typeAlias alias="Hprice" type="com.orilore.model.Hprice"/>
+		<typeAlias alias="Kind" type="com.orilore.model.Kind"/>
+		<typeAlias alias="Message" type="com.orilore.model.Message"/>
+		<typeAlias alias="Ms" type="com.orilore.model.Ms"/>
+		<typeAlias alias="Photo" type="com.orilore.model.Photo"/>
+		<typeAlias alias="Record" type="com.orilore.model.Record"/>
+		<typeAlias alias="Reserve" type="com.orilore.model.Reserve"/>
+		<typeAlias alias="Tour" type="com.orilore.model.Tour"/>
+		<typeAlias alias="User" type="com.orilore.model.User"/>
+	</typeAliases>
+	<plugins>
+	    <plugin interceptor ="com.github.pagehelper.PageHelper">
+	        <property name ="dialect" value="mysql"/>
+	        <property name ="offsetAsPageNum" value="true"/>
+	        <property name ="rowBoundsWithCount " value="true" />
+	        <property name ="pageSizeZero" value="true" />
+	        <property name ="reasonable" value="true" />
+	    </plugin>
+	</plugins>
+	<mappers>
+		<mapper resource="com/orilore/model/Admin.xml"/>
+		<mapper resource="com/orilore/model/Company.xml"/>
+		<mapper resource="com/orilore/model/House.xml"/>
+		<mapper resource="com/orilore/model/Hprice.xml"/>
+		<mapper resource="com/orilore/model/Kind.xml"/>
+		<mapper resource="com/orilore/model/Message.xml"/>
+		<mapper resource="com/orilore/model/Ms.xml"/>
+		<mapper resource="com/orilore/model/Photo.xml"/>
+		<mapper resource="com/orilore/model/Record.xml"/>
+		<mapper resource="com/orilore/model/Reserve.xml"/>
+		<mapper resource="com/orilore/model/Tour.xml"/>
+		<mapper resource="com/orilore/model/User.xml"/>
+	</mappers>
+</configuration>

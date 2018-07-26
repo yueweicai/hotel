@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.RecordMapper">
+	<resultMap type="Record" id="recordResultMap">
+		<id column="id" property="id"/>
+		<result column="custom" property="custom"/>
+		<result column="wxnick" property="wxnick"/>
+		<result column="phone" property="phone"/>
+		<result column="hid" property="hid"/>
+		<result column="price" property="price"/>
+		<result column="total" property="total"/>
+		<result column="rtime" property="rtime"/>
+		<result column="ltime" property="ltime"/>
+		<result column="persons" property="persons"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	<select id="selectOne" parameterType="Integer" resultType="Record">
+		select * from record where id=#{0}
+	</select>
+	<select id="select" resultMap="recordResultMap">
+		select * from record
+	</select>
+	<insert id="insert" parameterType="Record">
+		insert into record(custom,wxnick,phone,hid,price,total,rtime,ltime,persons,status) values(#{custom},#{wxnick},#{phone},#{hid},#{price},#{total},#{rtime},#{ltime},#{persons},#{status})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		delete from record where id=#{0}
+	</delete>
+	<update id="update" parameterType="Record">
+		update record set custom=#{custom},wxnick=#{wxnick},phone=#{phone},hid=#{hid},price=#{price},total=#{total},rtime=#{rtime},ltime=#{ltime},persons=#{persons},status=#{status} where id=#{id}
+	</update>
+</mapper>
