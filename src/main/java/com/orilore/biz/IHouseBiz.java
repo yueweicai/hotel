@@ -7,5 +7,6 @@ public interface IHouseBiz{
 	public boolean remove(Integer id);
 	public House find(Integer id);
 	public boolean enable(int id,int status);
+	public boolean saveImage(House bean);
 	public List<House> query(Map<String,Object> map);
 }

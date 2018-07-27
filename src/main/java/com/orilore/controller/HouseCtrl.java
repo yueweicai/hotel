@@ -1,7 +1,6 @@
 package com.orilore.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +19,18 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.orilore.biz.IHouseBiz;
 import com.orilore.model.House;
+import com.orilore.util.Uploader;
 
 @RestController
 @RequestMapping("/house")
 public class HouseCtrl {
 	@Resource
 	private IHouseBiz biz;
+
+	@RequestMapping("/find/{id}")
+	public House find(@PathVariable("id") int id){
+		return biz.find(id);
+	}
 	
 	@RequestMapping("/remove/{id}")
 	public boolean remove(@PathVariable("id") int id){
@@ -32,28 +38,45 @@ public class HouseCtrl {
 	}
 	
 	@RequestMapping("/uploads")
-	public int uploads(@RequestParam("files[]") MultipartFile[] files,HttpServletRequest request){
-		String path = request.getSession().getServletContext().getRealPath("/uploads");
-		int i = 0,m = 0;
-		for(MultipartFile file : files){
-			i++;
-			String oname = file.getOriginalFilename();//获取原始文件名
-			String ext = oname.substring(oname.lastIndexOf("."));
-			String fname = System.currentTimeMillis()+"-"+i+ext;
-			File dest = new File(path+"\\"+fname);
-			try {
-				file.transferTo(dest);
-				m++;
-			} catch (Exception e) {
-				e.printStackTrace();
+	public boolean uploads(MultipartFile pica,MultipartFile picb,MultipartFile picc,MultipartFile picd,HttpServletRequest request){
+		House bean = new House();
+		String id = request.getParameter("id");
+		bean.setId(Integer.parseInt(id));
+		String path = request.getSession().getServletContext().getRealPath("/images");
+		if(pica!=null && pica.getSize()>0){
+			String fname = Uploader.upload(pica, path);
+			if(fname!=null){
+				bean.setPica(fname);
 			}
 		}
-		return m;
+		if(picb!=null && picb.getSize()>0){
+			String fname = Uploader.upload(picb, path);
+			if(fname!=null){
+				bean.setPicb(fname);
+			}
+		}
+		if(picc!=null && picc.getSize()>0){
+			String fname = Uploader.upload(picc, path);
+			if(fname!=null){
+				bean.setPicc(fname);
+			}
+		}
+		if(picd!=null && picd.getSize()>0){
+			String fname = Uploader.upload(picd, path);
+			if(fname!=null){
+				bean.setPicd(fname);
+			}
+		}
+		return biz.saveImage(bean);
 	}
 	
 	@RequestMapping("/save")
-	public boolean save(House bean){
-		return biz.save(bean);
+	public House save(House bean){
+		if(biz.save(bean)){
+			return bean;
+		}else{
+			return null;
+		}
 	}
 	
 	@RequestMapping("/enable")
