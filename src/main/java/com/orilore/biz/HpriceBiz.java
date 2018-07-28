@@ -2,9 +2,14 @@ package com.orilore.biz;
 import com.orilore.model.*;
 import com.orilore.mapper.*;
 import java.util.*;
-public class HpriceBiz implements IHpriceBiz{
 
-	private HpriceMapper mapper  = null;
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+@Service
+public class HpriceBiz implements IHpriceBiz{
+	@Resource
+	private HpriceMapper mapper;
 
 	@Override
 	public boolean save(Hprice bean) {

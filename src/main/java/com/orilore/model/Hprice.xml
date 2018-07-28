@@ -10,20 +10,31 @@
 		<result column="price" property="price"/>
 		<result column="dis" property="dis"/>
 		<result column="status" property="status"/>
+		<association property="kind" javaType="Kind">
+			<id column="id2" property="id"/>
+			<result column="name" property="name"/>
+			<result column="icon" property="icon"/>
+			<result column="info" property="info"/>
+			<result column="status2" property="status"/>
+		</association>
 	</resultMap>
-	<select id="selectOne" parameterType="Integer" resultType="Hprice">
-		select * from hprice where id=#{0}
+	<select id="selectOne" parameterType="Integer" resultMap="hpriceResultMap">
+		select a.*,b.id id2,b.name,b.icon,b.info,b.status status2 
+		from hprice a left join kind b on a.kid=b.id
+		where a.status!=-1 and b.status!=-1 and id=#{0}
 	</select>
 	<select id="select" resultMap="hpriceResultMap">
-		select * from hprice
+		select a.*,b.id id2,b.name,b.icon,b.info,b.status status2 
+		from hprice a left join kind b on a.kid=b.id
+		where a.status!=-1 and b.status!=-1
 	</select>
 	<insert id="insert" parameterType="Hprice">
-		insert into hprice(kid,sdate,edate,price,dis,status) values(#{kid},#{sdate},#{edate},#{price},#{dis},#{status})
+		insert into hprice(kid,sdate,edate,price,dis) values(#{kid},#{sdate},#{edate},#{price},#{dis})
 	</insert>
 	<delete id="delete" parameterType="Integer">
-		delete from hprice where id=#{0}
+		update hprice set status=-1 where id=#{0}
 	</delete>
 	<update id="update" parameterType="Hprice">
-		update hprice set kid=#{kid},sdate=#{sdate},edate=#{edate},price=#{price},dis=#{dis},status=#{status} where id=#{id}
+		update hprice set kid=#{kid},sdate=#{sdate},edate=#{edate},price=#{price},dis=#{dis} where id=#{id}
 	</update>
 </mapper>
