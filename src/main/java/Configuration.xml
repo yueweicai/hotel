@@ -14,6 +14,7 @@
 		<typeAlias alias="Reserve" type="com.orilore.model.Reserve"/>
 		<typeAlias alias="Tour" type="com.orilore.model.Tour"/>
 		<typeAlias alias="User" type="com.orilore.model.User"/>
+		<typeAlias alias="Power" type="com.orilore.model.Power"/>
 	</typeAliases>
 	<plugins>
 	    <plugin interceptor ="com.github.pagehelper.PageHelper">
@@ -37,5 +38,6 @@
 		<mapper resource="com/orilore/model/Reserve.xml"/>
 		<mapper resource="com/orilore/model/Tour.xml"/>
 		<mapper resource="com/orilore/model/User.xml"/>
+		<mapper resource="com/orilore/model/Power.xml"/>
 	</mappers>
 </configuration>
