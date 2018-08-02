@@ -6,20 +6,22 @@
 		<id column="id" property="id"/>
 		<result column="username" property="username"/>
 		<result column="password" property="password"/>
+		<result column="status" property="status"/>
 	</resultMap>
 	<select id="selectOne" parameterType="Integer" resultType="Admin">
-		select * from admin where id=#{0}
+		select * from admin where id=#{0} and status!=-1
 	</select>
 	<select id="select" resultMap="adminResultMap">
-		select * from admin
+		select * from admin where status!=-1
 	</select>
-	<insert id="insert" parameterType="Admin">
-		insert into admin(username,password) values(#{username},#{password})
+	<!-- 插入记录后自动获取主键id的值 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Admin">
+		insert into admin(username,password,status) values(#{username},#{password},#{status})
 	</insert>
 	<delete id="delete" parameterType="Integer">
-		delete from admin where id=#{0}
+		update admin set status=-1 where id=#{0}
 	</delete>
 	<update id="update" parameterType="Admin">
-		update admin set username=#{username},password=#{password} where id=#{id}
+		update admin set username=#{username},password=#{password},status=#{status} where id=#{id}
 	</update>
 </mapper>
