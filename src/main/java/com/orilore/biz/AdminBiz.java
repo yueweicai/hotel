@@ -8,7 +8,6 @@ import java.util.*;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 @Service
@@ -29,24 +28,39 @@ public class AdminBiz implements IAdminBiz{
 	//只要有任意一条sql执行失败，将会全部回滚
 	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=SQLException.class)
 	public boolean save(Admin bean,List<Integer> powers) throws SQLException {
+		boolean flag = true;
 		if(bean.getId()!=null){
-			return this.mapper.update(bean);
+			if(this.mapper.update(bean)){
+				if(this.dao.delete(bean.getId())){
+					int aid = bean.getId();
+					for(int pid : powers){
+						Rule rule = new Rule(aid,pid);
+						if(!dao.insert(rule)){
+							flag = false;
+							throw new SQLException("用户权限保存失败");
+						}
+					}
+				}else{
+					flag = false;
+				}
+			}else{
+				flag = false;
+			}
 		}else{
-			boolean flag1 = this.mapper.insert(bean);
-			boolean flag2 = true;
-			//向admin表中成功插入新记录
-			if(flag1){
+			if(this.mapper.insert(bean)){
 				int aid = bean.getId();
 				for(int pid : powers){
 					Rule rule = new Rule(aid,pid);
 					if(!dao.insert(rule)){
-						flag2 = false;
+						flag = false;
 						throw new SQLException("用户权限保存失败");
 					}
 				}
+			}else{
+				flag = false;
 			}
-			return flag1 && flag2;
 		}
+		return flag;
 	}
 
 	@Override
@@ -62,6 +76,11 @@ public class AdminBiz implements IAdminBiz{
 	@Override
 	public List<Admin> query() {
 		return this.mapper.select();
+	}
+
+	@Override
+	public Admin get(Admin bean) {
+		return this.mapper.selectAdmin(bean);
 	}
 }
 

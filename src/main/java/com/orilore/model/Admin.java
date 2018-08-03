@@ -1,9 +1,11 @@
 package com.orilore.model;
+import java.util.List;
 public class Admin{
 	private Integer id;
 	private String username;
 	private String password;
 	private Integer status;
+	private List<Power> powers;
 	
 	public void setId(Integer id){
 		this.id=id;	}
@@ -26,5 +28,11 @@ public class Admin{
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public List<Power> getPowers() {
+		return powers;
+	}
+	public void setPowers(List<Power> powers) {
+		this.powers = powers;
 	}
 }

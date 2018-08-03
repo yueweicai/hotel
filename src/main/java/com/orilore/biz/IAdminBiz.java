@@ -8,4 +8,5 @@ public interface IAdminBiz{
 	public boolean remove(Integer id);
 	public Admin find(Integer id);
 	public List<Admin> query();
+	public Admin get(Admin bean);
 }

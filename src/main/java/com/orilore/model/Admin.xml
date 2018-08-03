@@ -3,15 +3,38 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.orilore.mapper.AdminMapper">
 	<resultMap type="Admin" id="adminResultMap">
-		<id column="id" property="id"/>
+		<id column="aid" property="id"/>
 		<result column="username" property="username"/>
 		<result column="password" property="password"/>
 		<result column="status" property="status"/>
+		<collection property="powers" ofType="Power">
+			<id column="id" property="id"/>
+			<result column="pname" property="pname"/>
+			<result column="pid" property="pid"/>
+			<result column="url" property="url"/>
+			<result column="icon" property="icon"/>
+			<result column="xh" property="xh"/>
+		</collection>
 	</resultMap>
-	<select id="selectOne" parameterType="Integer" resultType="Admin">
-		select * from admin where id=#{0} and status!=-1
+	<select id="selectOne" parameterType="Integer" resultMap="adminResultMap">
+		select a.id aid,a.username,a.password,a.status,
+	    b.id,b.pname,b.url,b.pid,b.icon,b.xh
+	    from admin a left join rule c
+	    on a.id=c.aid left join power b
+	    on b.id=c.pid
+	    where a.id=#{0} and a.status!=-1 and b.status!=-1
 	</select>
-	<select id="select" resultMap="adminResultMap">
+	
+	<select id="selectAdmin" parameterType="Admin" resultMap="adminResultMap">
+		select a.id aid,a.username,a.password,a.status,
+	    b.id,b.pname,b.url,b.pid,b.icon,b.xh
+	    from admin a left join rule c
+	    on a.id=c.aid left join power b
+	    on b.id=c.pid
+	    where a.status!=-1 and b.status!=-1 and username=#{username} and password=#{password}
+	</select>
+	
+	<select id="select" resultType="Admin">
 		select * from admin where status!=-1
 	</select>
 	<!-- 插入记录后自动获取主键id的值 -->
