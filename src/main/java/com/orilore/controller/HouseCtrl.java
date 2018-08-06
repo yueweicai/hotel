@@ -84,6 +84,16 @@ public class HouseCtrl {
 		return this.biz.enable(id, status);
 	}
 	
+
+	@RequestMapping("/query2")
+	public List<House> query2(int kid,String rdate,String ldate){
+		Map<String,Object> map = new HashMap<>();
+		map.put("kid", kid);
+		map.put("rdate", rdate);
+		map.put("ldate", ldate);
+		return this.biz.query2(map);
+	}
+	
 	@RequestMapping("/query")
 	public Map<String,Object> query(HttpServletRequest request){
 		//设置查询条件

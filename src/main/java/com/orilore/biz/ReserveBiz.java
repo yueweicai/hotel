@@ -2,9 +2,14 @@ package com.orilore.biz;
 import com.orilore.model.*;
 import com.orilore.mapper.*;
 import java.util.*;
-public class ReserveBiz implements IReserveBiz{
 
-	private ReserveMapper mapper  = null;
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+@Service
+public class ReserveBiz implements IReserveBiz{
+	@Resource
+	private ReserveMapper mapper;
 
 	@Override
 	public boolean save(Reserve bean) {

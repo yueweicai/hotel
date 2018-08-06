@@ -34,5 +34,10 @@ public class HpriceBiz implements IHpriceBiz{
 	public List<Hprice> query() {
 		return this.mapper.select();
 	}
+
+	@Override
+	public Hprice find(Map<String, Object> map) {
+		return this.mapper.select2(map);
+	}
 }
 

@@ -17,18 +17,18 @@
 		<result column="res" property="res"/>
 	</resultMap>
 	<select id="selectOne" parameterType="Integer" resultType="Reserve">
-		select * from reserve where id=#{0}
+		select * from reserve where id=#{0} and res!=-1
 	</select>
 	<select id="select" resultMap="reserveResultMap">
-		select * from reserve
+		select * from reserve where res!=-1 order by id desc
 	</select>
 	<insert id="insert" parameterType="Reserve">
-		insert into reserve(custom,wxnick,phone,persons,rtime,rdate,ldate,hid,price,total,res) values(#{custom},#{wxnick},#{phone},#{persons},#{rtime},#{rdate},#{ldate},#{hid},#{price},#{total},#{res})
+		insert into reserve(custom,wxnick,phone,persons,rdate,ldate,hid,price,total) values(#{custom},#{wxnick},#{phone},#{persons},#{rdate},#{ldate},#{hid},#{price},#{total})
 	</insert>
 	<delete id="delete" parameterType="Integer">
-		delete from reserve where id=#{0}
+		update reserve set res=-1 where id=#{0}
 	</delete>
 	<update id="update" parameterType="Reserve">
-		update reserve set custom=#{custom},wxnick=#{wxnick},phone=#{phone},persons=#{persons},rtime=#{rtime},rdate=#{rdate},ldate=#{ldate},hid=#{hid},price=#{price},total=#{total},res=#{res} where id=#{id}
+		update reserve set custom=#{custom},wxnick=#{wxnick},phone=#{phone},persons=#{persons},rdate=#{rdate},ldate=#{ldate},hid=#{hid},price=#{price},total=#{total} where id=#{id}
 	</update>
 </mapper>

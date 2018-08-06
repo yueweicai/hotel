@@ -23,6 +23,15 @@
 		from hprice a left join kind b on a.kid=b.id
 		where a.status!=-1 and b.status!=-1 and id=#{0}
 	</select>
+	
+	<select id="select2" parameterType="map" resultType="Hprice">
+		select * from hprice where status!=-1
+   		and kid=#{kid} 
+   		and sdate&lt;=#{sdate}
+   		and edate&gt;=#{edate} 
+   		limit 0,1
+	</select>
+	
 	<select id="select" resultMap="hpriceResultMap">
 		select a.*,b.id id2,b.name,b.icon,b.info,b.status status2 
 		from hprice a left join kind b on a.kid=b.id

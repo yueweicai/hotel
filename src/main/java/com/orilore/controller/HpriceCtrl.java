@@ -22,6 +22,16 @@ public class HpriceCtrl {
 	@Resource
 	private IHpriceBiz biz;
 	
+	@RequestMapping("/get")
+	public Hprice getprice(int kid,String sdate,String edate){
+		Map<String,Object> map = new HashMap<>();
+		map.put("kid", kid);
+		map.put("sdate", sdate);
+		map.put("edate", edate);
+		
+		return biz.find(map);
+	}
+	
 	@RequestMapping("/query")
 	public Map<String,Object> query(@RequestParam("page") int page,@RequestParam("rows") int rows){
 		PageHelper.startPage(page,rows);

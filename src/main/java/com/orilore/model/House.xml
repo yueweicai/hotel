@@ -29,6 +29,14 @@
 		select a.*,b.id kid,b.name,b.icon,b.info kinfo from house a left join kind b
 		on a.kid=b.id where a.status!=-1 and a.id=#{0}
 	</select>
+	<select id="select2" parameterType="map" resultType="House">
+		select * from house where kid=#{kid} and status=0 and id not in(
+           select hid from reserve where 
+           (rdate&lt;#{rdate} and ldate&gt;#{rdate})
+           or
+           (rdate&lt;#{ldate} and ldate&gt;#{ldate})
+    	)
+	</select>
 	<select id="select" parameterType="map" resultMap="houseResultMap">
 		select a.*,b.id kid,b.name,b.icon,b.info kinfo from house a left join kind b
 		on a.kid=b.id where a.status!=-1
