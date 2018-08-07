@@ -22,12 +22,12 @@
 		select * from record
 	</select>
 	<insert id="insert" parameterType="Record">
-		insert into record(custom,wxnick,phone,hid,price,total,rtime,ltime,persons,status) values(#{custom},#{wxnick},#{phone},#{hid},#{price},#{total},#{rtime},#{ltime},#{persons},#{status})
+		insert into record(custom,wxnick,phone,hid,price,total,ltime,persons) values(#{custom},#{wxnick},#{phone},#{hid},#{price},#{total},#{ltime},#{persons})
 	</insert>
 	<delete id="delete" parameterType="Integer">
 		delete from record where id=#{0}
 	</delete>
 	<update id="update" parameterType="Record">
-		update record set custom=#{custom},wxnick=#{wxnick},phone=#{phone},hid=#{hid},price=#{price},total=#{total},rtime=#{rtime},ltime=#{ltime},persons=#{persons},status=#{status} where id=#{id}
+		update record set custom=#{custom},wxnick=#{wxnick},phone=#{phone},hid=#{hid},price=#{price},total=#{total},ltime=#{ltime},persons=#{persons} where id=#{id}
 	</update>
 </mapper>

@@ -1,5 +1,7 @@
 package com.orilore.model;
 public class Reserve{
+	private String hname;
+	private String kname;
 	private Integer id;
 	public void setId(Integer id){
 		this.id=id;
@@ -83,5 +85,21 @@ public class Reserve{
 	}
 	public Integer getRes(){
 		return this.res;
+	}
+
+	public String getHname() {
+		return hname;
+	}
+
+	public void setHname(String hname) {
+		this.hname = hname;
+	}
+
+	public String getKname() {
+		return kname;
+	}
+
+	public void setKname(String kname) {
+		this.kname = kname;
 	}
 }
