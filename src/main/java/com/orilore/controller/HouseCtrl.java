@@ -19,6 +19,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.orilore.biz.IHouseBiz;
 import com.orilore.model.House;
+import com.orilore.model.HouseState;
 import com.orilore.util.Uploader;
 
 @RestController
@@ -27,6 +28,11 @@ public class HouseCtrl {
 	@Resource
 	private IHouseBiz biz;
 
+	@RequestMapping("/state")
+	public List<HouseState> state(){
+		return biz.state();
+	}
+	
 	@RequestMapping("/find/{id}")
 	public House find(@PathVariable("id") int id){
 		return biz.find(id);

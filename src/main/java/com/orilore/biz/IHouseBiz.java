@@ -10,4 +10,5 @@ public interface IHouseBiz{
 	public boolean saveImage(House bean);
 	public List<House> query(Map<String,Object> map);
 	public List<House> query2(Map<String,Object> map);
+	public List<HouseState> state();
 }

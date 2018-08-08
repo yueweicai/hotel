@@ -15,4 +15,5 @@ public interface HouseMapper{
 	public boolean update(House bean);
 	public boolean updateImage(House bean);
 	public boolean enable(House bean);
+	public List<HouseState> selectByKind();
 }

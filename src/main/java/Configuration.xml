@@ -16,6 +16,7 @@
 		<typeAlias alias="User" type="com.orilore.model.User"/>
 		<typeAlias alias="Power" type="com.orilore.model.Power"/>
 		<typeAlias alias="Rule" type="com.orilore.model.Rule"/>
+		<typeAlias alias="HouseState" type="com.orilore.model.HouseState"/>
 	</typeAliases>
 	<plugins>
 	    <plugin interceptor ="com.github.pagehelper.PageHelper">

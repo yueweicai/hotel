@@ -43,6 +43,14 @@
 		<if test="kid!=null"> and a.kid=#{kid} </if>
 		<if test="beds!=null"> and a.beds=#{beds} </if>
 	</select>
+	
+	<select id="selectByKind" resultType="HouseState">
+		select b.name,count(*) quantity from house a
+	    left join kind b on a.kid=b.id
+	    where b.status!=-1
+	    group by b.name
+	</select>
+	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="House">
 		insert into house(hname,kid,size,beds,price,dis,info) values(#{hname},#{kid},#{size},#{beds},#{price},#{dis},#{info})
 	</insert>

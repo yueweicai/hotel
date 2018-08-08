@@ -11,4 +11,5 @@ public interface RecordMapper{
 	public boolean delete(Integer id);
 	public List<Record> select();
 	public boolean update(Record bean);
+	public List<HouseState> selectPersons(String year);
 }

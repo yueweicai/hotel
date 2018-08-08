@@ -6,4 +6,5 @@ public interface IRecordBiz{
 	public boolean remove(Integer id);
 	public Record find(Integer id);
 	public List<Record> query();
+	public List<HouseState> state(String year);
 }
